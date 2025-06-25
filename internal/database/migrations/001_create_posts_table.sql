@@ -26,6 +26,20 @@ CREATE TABLE IF NOT EXISTS posts (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS images JSONB DEFAULT '[]';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS videos JSONB DEFAULT '[]';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS mentions TEXT[] DEFAULT '{}';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS hashtags TEXT[] DEFAULT '{}';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS links TEXT[] DEFAULT '{}';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS media_count INTEGER DEFAULT 0;
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS post_type VARCHAR(50) DEFAULT 'text';
+
+-- Create indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_posts_media_count ON posts(media_count);
+CREATE INDEX IF NOT EXISTS idx_posts_post_type ON posts(post_type);
+CREATE INDEX IF NOT EXISTS idx_posts_mentions ON posts USING GIN(mentions);
+CREATE INDEX IF NOT EXISTS idx_posts_hashtags ON posts USING GIN(hashtags);
+
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_posts_group_id ON posts(group_id);
 CREATE INDEX IF NOT EXISTS idx_posts_author_id ON posts(author_id);

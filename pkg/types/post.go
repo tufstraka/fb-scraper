@@ -16,12 +16,15 @@ type ScrapedPost struct {
     LikesCount    int       `json:"likes_count"`
     CommentsCount int       `json:"comments_count"`
     SharesCount   int       `json:"shares_count"`
-    PostType      string    `json:"post_type"`
-    Images        []string  `json:"images"`
-    Videos        []string  `json:"videos"`
-    Links         []string  `json:"links"`
-    Hashtags      []string  `json:"hashtags"`
-    Mentions      []string  `json:"mentions"`
+    
+    // Add these new fields for media content
+    Images        []MediaItem   `json:"images"`
+    Videos        []MediaItem   `json:"videos"`
+    Mentions      []string      `json:"mentions"`
+    Hashtags      []string      `json:"hashtags"`
+    Links         []string      `json:"links"`
+    MediaCount    int           `json:"media_count"`
+    PostType      string        `json:"post_type"` // "text", "image", "video", "link", "mixed"
 }
 
 type PostFilter struct {
@@ -45,6 +48,15 @@ type FilterStats struct {
     LikesFiltered  int `json:"likes_filtered"`
     TimeFiltered   int `json:"time_filtered"`
     KeywordFiltered int `json:"keyword_filtered"`
+}
+
+type MediaItem struct {
+    URL         string `json:"url"`
+    Type        string `json:"type"`        // "image", "video"
+    Description string `json:"description"`
+    Width       int    `json:"width"`
+    Height      int    `json:"height"`
+    Thumbnail   string `json:"thumbnail"`   // For videos
 }
 
 func (fs FilterStats) String() string {

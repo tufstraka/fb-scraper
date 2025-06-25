@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Facebook Scraper Results - Posts with 1000+ likes in past 5 days"
+echo "Facebook Scraper Results - Posts with 50+ likes in past 5 days"
 echo "=================================================================="
 
 # Check if PostgreSQL container is running
@@ -25,7 +25,7 @@ SELECT
     timestamp,
     scraped_at
 FROM posts 
-WHERE likes >= 1000 
+WHERE likes >= 50
     AND scraped_at >= NOW() - INTERVAL '5 days'
 ORDER BY likes DESC, scraped_at DESC
 LIMIT 20;
@@ -40,7 +40,7 @@ SELECT
     MAX(likes) as max_likes,
     COUNT(DISTINCT group_name) as groups_scraped
 FROM posts 
-WHERE likes >= 1000 
+WHERE likes >= 50 
     AND scraped_at >= NOW() - INTERVAL '5 days';
 "
 
@@ -52,7 +52,7 @@ SELECT
     COUNT(*) as post_count,
     ROUND(AVG(likes), 2) as avg_likes
 FROM posts 
-WHERE likes >= 1000 
+WHERE likes >= 50 
     AND scraped_at >= NOW() - INTERVAL '5 days'
 GROUP BY group_name
 ORDER BY post_count DESC;

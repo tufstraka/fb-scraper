@@ -20,15 +20,18 @@ type Post struct {
     Likes       int       `json:"likes" db:"likes"`
     Comments    int       `json:"comments" db:"comments"`
     Shares      int       `json:"shares" db:"shares"`
-    Images      StringArray `json:"images" db:"images"`
-    Videos      StringArray `json:"videos" db:"videos"`
-    Links       StringArray `json:"links" db:"links"`
-    Hashtags    StringArray `json:"hashtags" db:"hashtags"`
-    Mentions    StringArray `json:"mentions" db:"mentions"`
     PostType    string    `json:"post_type" db:"post_type"`
     ScrapedAt   time.Time `json:"scraped_at" db:"scraped_at"`
     CreatedAt   time.Time `json:"created_at" db:"created_at"`
     UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
+
+        // Add these new fields
+    Images      string   `db:"images" json:"images"`       // JSON string
+    Videos      string   `db:"videos" json:"videos"`       // JSON string
+    Mentions    []string `db:"mentions" json:"mentions"`   // PostgreSQL array
+    Hashtags    []string `db:"hashtags" json:"hashtags"`   // PostgreSQL array
+    Links       []string `db:"links" json:"links"`         // PostgreSQL array
+    MediaCount  int      `db:"media_count" json:"media_count"`
 }
 
 // StringArray for handling JSON arrays in PostgreSQL

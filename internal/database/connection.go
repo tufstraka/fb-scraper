@@ -7,6 +7,8 @@ import (
     "os"
     "path/filepath"
     "sort"
+    "github.com/lib/pq"    
+
 
     "facebook-scraper/internal/config"
     "facebook-scraper/internal/database/models"
@@ -86,35 +88,38 @@ func (db *DB) RunMigrations() error {
     return nil
 }
 
+// Update the SavePost method
+
 func (db *DB) SavePost(post *models.Post) error {
     query := `
         INSERT INTO posts (
-            group_id, group_name, post_id, author_id, author_name, content, 
-            post_url, timestamp, likes, comments, shares, images, videos, 
-            links, hashtags, mentions, post_type
+            group_id, group_name, post_id, author_name, author_id, content, 
+            post_url, timestamp, likes, comments, shares, post_type, scraped_at,
+            images, videos, mentions, hashtags, links, media_count
         ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19
         ) ON CONFLICT (post_id) DO UPDATE SET
-            content = EXCLUDED.content,
             likes = EXCLUDED.likes,
             comments = EXCLUDED.comments,
             shares = EXCLUDED.shares,
-            updated_at = CURRENT_TIMESTAMP
-        RETURNING id`
+            scraped_at = EXCLUDED.scraped_at,
+            images = EXCLUDED.images,
+            videos = EXCLUDED.videos,
+            mentions = EXCLUDED.mentions,
+            hashtags = EXCLUDED.hashtags,
+            links = EXCLUDED.links,
+            media_count = EXCLUDED.media_count
+    `
 
-    err := db.conn.QueryRow(
-        query,
-        post.GroupID, post.GroupName, post.PostID, post.AuthorID, post.AuthorName,
+    _, err := db.conn.Exec(query,
+        post.GroupID, post.GroupName, post.PostID, post.AuthorName, post.AuthorID,
         post.Content, post.PostURL, post.Timestamp, post.Likes, post.Comments,
-        post.Shares, post.Images, post.Videos, post.Links, post.Hashtags,
-        post.Mentions, post.PostType,
-    ).Scan(&post.ID)
+        post.Shares, post.PostType, post.ScrapedAt, post.Images, post.Videos,
+        pq.Array(post.Mentions), pq.Array(post.Hashtags), pq.Array(post.Links),
+        post.MediaCount,
+    )
 
-    if err != nil {
-        return fmt.Errorf("failed to save post: %w", err)
-    }
-
-    return nil
+    return err
 }
 
 func (db *DB) GetPostsByGroup(groupID string, limit int) ([]*models.Post, error) {

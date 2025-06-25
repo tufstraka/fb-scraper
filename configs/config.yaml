@@ -1,0 +1,32 @@
+facebook:
+  base_url: "https://www.facebook.com"
+  mobile_url: "https://m.facebook.com"
+  timeout: 30
+  rate_limit:
+    requests_per_minute: 10
+    delay_between_requests: 6
+  auth:
+    method: "cookies"
+    cookies_file: "configs/cookies.json"
+    user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+
+scraper:
+  concurrent_workers: 3
+  retry_attempts: 3
+  retry_delay: 5
+  output_format: "json"
+  
+database:
+  host: "postgres"  # This should be overridden by env var
+  port: 5432
+  name: "facebook_scraper"  # Fixed: was different
+  user: "scraper_user"      # Fixed: was postgres
+  password: "scraper_password"  # Fixed: was password
+  ssl_mode: "disable"
+
+logging:
+  level: "debug"  # Changed from info to debug
+  file: "logs/scraper.log"
+  max_size: 100
+  max_backups: 3
+  max_age: 28

@@ -1,0 +1,94 @@
+{
+  "facebook.com": [
+    {
+      "name": "c_user",
+      "value": "100041388063336",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "xs",
+      "value": "7%3A_bOdu3fJflfLeQ%3A2%3A1750765822%3A-1%3A-1",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "datr",
+      "value": "3VONZyXx8HFxobr_jhvvYZin",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "sb",
+      "value": "3VONZz6OeW6FWg1mcL9A45U0",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "fr",
+      "value": "1HGJTiL91TXQZMdoC.AWdLulng4Rt5EfHC_Km-Z2K8zBEeNyb8WwmcedFhf1vKX-sX-TQ.BoWpBl..AAA.0.0.BoWpMY.AWc17cJ3176JTgfraDNiGQ2L9SE",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "dbln",
+      "value": "%7B%22100041388063336%22%3A%22j2KE5J8c%22%7D",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "presence",
+      "value": "C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1750766383446%2C%22v%22%3A1%7D",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "ps_l",
+      "value": "1",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "ps_n",
+      "value": "1",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "wd",
+      "value": "1366x330",
+      "domain": "",
+      "path": "",
+      "secure": false,
+      "httpOnly": false,
+      "expires": "0001-01-01T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: facebook_scraper_db
+    environment:
+      POSTGRES_DB: facebook_scraper
+      POSTGRES_USER: scraper_user
+      POSTGRES_PASSWORD: scraper_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+      - ./internal/database/migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    networks:
+      - scraper_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scraper_user -d facebook_scraper"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  facebook-scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: facebook_scraper_app
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=scraper_user
+      - DB_PASSWORD=scraper_password
+      - DB_NAME=facebook_scraper
+      - DB_SSL_MODE=disable
+      - LOG_LEVEL=info
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./logs:/app/logs
+      - ./data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - scraper_network
+    restart: "no"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: facebook_scraper_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - scraper_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  scraper_network:
+    driver: bridge

@@ -133,6 +133,16 @@ psql -h localhost -p 5433 -U scraper_user -d facebook_scraper
 ### Local Development
 
 ```bash
+# Install geckodriver for Selenium Firefox
+cd /tmp
+wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
+tar -xzf geckodriver-v0.33.0-linux64.tar.gz
+sudo mv geckodriver /usr/local/bin/
+sudo chmod +x /usr/local/bin/geckodriver
+
+# Verify installation
+geckodriver --version
+
 # Install Go dependencies
 go mod download
 

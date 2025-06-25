@@ -76,7 +76,6 @@ PGADMIN_DEFAULT_PASSWORD=admin123
 #### Cookies Setup (`configs/cookies.json`)
 ```json
 // Add your Facebook authentication cookies
-// Use the provided extraction script
 ```
 
 ### 4. Extract Facebook Cookies

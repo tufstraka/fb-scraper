@@ -11,7 +11,7 @@
     },
     {
       "name": "xs",
-      "value": "7%3A_bOdu3fJflfLeQ%3A2%3A1750765822%3A-1%3A-1",
+      "value": "19%3AQv21mx-Gtx9D6g%3A2%3A1750951518%3A-1%3A-1",
       "domain": "",
       "path": "",
       "secure": false,
@@ -20,7 +20,7 @@
     },
     {
       "name": "datr",
-      "value": "2ydcaFkan_pmTgThvaBNoet0",
+      "value": "32ddaK05K3waUde9j_7UvqiK",
       "domain": "",
       "path": "",
       "secure": false,
@@ -29,7 +29,7 @@
     },
     {
       "name": "sb",
-      "value": "3VONZz6OeW6FWg1mcL9A45U0",
+      "value": "EWZdaOLTRPvmxHYO2bmkjTuq",
       "domain": "",
       "path": "",
       "secure": false,
@@ -38,7 +38,7 @@
     },
     {
       "name": "fr",
-      "value": "1HGJTiL91TXQZMdoC.AWdLulng4Rt5EfHC_Km-Z2K8zBEeNyb8WwmcedFhf1vKX-sX-TQ.BoWpBl..AAA.0.0.BoWpMY.AWc17cJ3176JTgfraDNiGQ2L9SE",
+      "value": "0TylOpNE3L5RudSV1.AWdOwPZlZ_Sr42m9uFNYO7-zXnd1zoQih5GCRJtbHHVSJUYR2f0.BoXWYR..AAA.0.0.BoXWZi.AWfqGsr-p2AoPvg97mQhDrDMVmA",
       "domain": "",
       "path": "",
       "secure": false,
@@ -56,7 +56,7 @@
     },
     {
       "name": "presence",
-      "value": "C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1750766383446%2C%22v%22%3A1%7D",
+      "value": "C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1750951529127%2C%22v%22%3A1%7D",
       "domain": "",
       "path": "",
       "secure": false,
@@ -91,26 +91,8 @@
       "expires": "0001-01-01T00:00:00Z"
     },
     {
-      "name": "datr",
-      "value": "AilcaD7__CUVwa_zdKX1jhVA",
-      "domain": "",
-      "path": "",
-      "secure": false,
-      "httpOnly": false,
-      "expires": "0001-01-01T00:00:00Z"
-    },
-    {
-      "name": "ps_l",
-      "value": "1",
-      "domain": "",
-      "path": "",
-      "secure": false,
-      "httpOnly": false,
-      "expires": "0001-01-01T00:00:00Z"
-    },
-    {
-      "name": "ps_n",
-      "value": "1",
+      "name": "locale",
+      "value": "en_US",
       "domain": "",
       "path": "",
       "secure": false,

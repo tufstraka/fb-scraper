@@ -357,7 +357,7 @@ func NewBrowserScraper(logger *logrus.Logger) *EnhancedBrowserScraper {
         chromedp.Flag("start-maximized", true),
         // Additional options to improve stability
         chromedp.Flag("enable-automation", false),
-        chromedp.Flag("disable-blink-features", "AutomationControlled"),
+        //chromedp.Flag("disable-blink-features", "AutomationControlled"),
         chromedp.WindowSize(1280, 900),
     )
 

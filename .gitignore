@@ -1,2 +1,95 @@
-node_modules/
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+
+# Environment files
 .env
+.env.local
+.env.*.local
+
+# Log files
+logs/*.log
+*.log
+
+# Data directories
+data/
+backups/
+metrics.json
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker volumes
+postgres_data/
+pgadmin_data/
+redis_data/
+
+# Temporary files
+tmp/
+temp/
+
+# Sensitive configuration files
+configs/cookies.json
+configs/secrets.yaml
+
+# Build artifacts
+dist/
+build/
+
+# Coverage reports
+coverage.txt
+coverage.html
+
+# Node modules (if any frontend is added)
+node_modules/
+
+# Python cache (if any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development files
+.local/
+local_*
+
+# Database dumps
+*.sql
+*.dump
+
+# Certificates
+*.pem
+*.key
+*.crt
+
+# Backup files
+*.bak
+*.backup

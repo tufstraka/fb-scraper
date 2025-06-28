@@ -1,0 +1,60 @@
+# Development overrides for docker-compose
+services:
+  postgres:
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_LOG_STATEMENT=all
+      - POSTGRES_LOG_MIN_DURATION_STATEMENT=0
+    volumes:
+      - ./logs:/var/log/postgresql
+
+  pgadmin:
+    ports:
+      - "8080:80"
+    environment:
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
+      - PGADMIN_CONFIG_WTF_CSRF_CHECK_DEFAULT=False
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+
+  # Development API server
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: facebook_scraper_api
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=scraper_user
+      - DB_PASSWORD=scraper_password
+      - DB_NAME=facebook_scraper
+      - API_PORT=8080
+    ports:
+      - "8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - scraper_network
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: facebook_scraper_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - scraper_network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+    driver: local

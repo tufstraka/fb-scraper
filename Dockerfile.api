@@ -1,0 +1,39 @@
+# API Server Dockerfile
+FROM golang:1.23-alpine AS builder
+
+WORKDIR /app
+
+RUN apk add --no-cache git ca-certificates tzdata
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -v -a -installsuffix cgo -o bin/api-server cmd/api/main.go
+
+# Final stage
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates tzdata curl
+
+WORKDIR /app
+
+RUN adduser -D -h /home/scraper -s /bin/bash scraper
+
+COPY --from=builder /app/bin/api-server .
+RUN chmod +x ./api-server
+
+RUN mkdir -p /app/logs /app/data && \
+    chown -R scraper:scraper /app
+
+COPY configs/ /app/configs/
+RUN chown -R scraper:scraper /app
+
+USER scraper
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/api/health || exit 1
+
+CMD ["./api-server", "-port=8080"]

@@ -1,4 +1,4 @@
-# Facebook Scraper - Complete Production-Ready System
+# FS
 
 A comprehensive, production-ready Facebook scraper built with Go, featuring advanced parsing, real-time monitoring, web dashboard, API endpoints, and robust error handling.
 
